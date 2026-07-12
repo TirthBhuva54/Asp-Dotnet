@@ -1,0 +1,7 @@
+.page-wrap { padding: 8px 0; }
+.page-wrap h2 { font-size: 20px; color: #1a1a1a; margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: #888; margin-bottom: 20px; }
+.report-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.report-card { background: white; border-radius: 7px; padding: 20px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); text-align: center; }
+.r-num { font-size: 28px; font-weight: 700; color: #4f5fc4; }
+.r-label { font-size: 13px; color: #888; margin-top: 4px; }

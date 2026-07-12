@@ -51,7 +51,7 @@ function Login({ onLogin }) {
             <a href="#" className="forgot">Forgot password?</a>
           </div>
 
-          <button className="btn-login" onClick={() => navigate('/dashboard')}>Sign In</button>
+          <button className="btn-login" >Sign In</button>
         </div>
       </div>
     </div>
