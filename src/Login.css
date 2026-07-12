@@ -166,3 +166,5 @@ body {
 .btn-login:hover {
   background: #3d4db0;
 }
+
+.login-error { font-size: 13px; color: #e74c3c; margin-bottom: 10px; }

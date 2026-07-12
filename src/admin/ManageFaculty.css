@@ -12,7 +12,7 @@
 
 .badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
 .badge.active   { background: #e6f9f0; color: #27ae60; }
-.badge.inactive { background: #f0f0f0; color: #888; }
+.badge.inactive { background: #fff4e5; color: #e67e22; }
 
 .act-btn { padding: 4px 10px; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; margin-right: 5px; }
 .act-btn.view   { background: #e8f0fe; color: #4f5fc4; }
