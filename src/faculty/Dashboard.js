@@ -1,48 +1,45 @@
 import './Dashboard.css';
 import { useState } from 'react';
-import MyProject from './MyProject';
-import MyTasks from './MyTasks';
-import Submissions from './Submissions';
+import MyStudents from './MyStudents';
+import Evaluate from './Evaluate';
 import Announcements from './Announcements';
-import MySupervisor from './MySupervisor';
 import Schedule from './Schedule';
 
 function DashboardHome() {
   return (
     <div>
-      <p className="welcome-text">Welcome, Arjun Sharma </p>
+      <p className="welcome-text">Welcome, Raj Sharma </p>
 
       <div className="stats-grid">
         <div className="stat-card" style={{ borderTop: '4px solid #4f5fc4' }}>
-          <p className="stat-value" style={{ color: '#4f5fc4' }}>AI Chatbot</p>
-          <p className="stat-label">My Project</p>
-        </div>
-        <div className="stat-card" style={{ borderTop: '4px solid #e67e22' }}>
-          <p className="stat-value" style={{ color: '#e67e22' }}>3</p>
-          <p className="stat-label">Pending Tasks</p>
+          <p className="stat-value" style={{ color: '#4f5fc4' }}>5</p>
+          <p className="stat-label">Assigned Students</p>
         </div>
         <div className="stat-card" style={{ borderTop: '4px solid #27ae60' }}>
-          <p className="stat-value" style={{ color: '#27ae60' }}>5</p>
-          <p className="stat-label">Tasks Completed</p>
+          <p className="stat-value" style={{ color: '#27ae60' }}>3</p>
+          <p className="stat-label">Projects Active</p>
+        </div>
+        <div className="stat-card" style={{ borderTop: '4px solid #e67e22' }}>
+          <p className="stat-value" style={{ color: '#e67e22' }}>4</p>
+          <p className="stat-label">Pending Reviews</p>
         </div>
         <div className="stat-card" style={{ borderTop: '4px solid #8e44ad' }}>
           <p className="stat-value" style={{ color: '#8e44ad' }}>2</p>
-          <p className="stat-label">Submissions</p>
+          <p className="stat-label">Completed</p>
         </div>
       </div>
 
       <div className="dash-row">
         <div className="table-section">
-          <h3>My Recent Tasks</h3>
+          <h3>My Students</h3>
           <table className="proj-table">
             <thead>
-              <tr><th>#</th><th>Task</th><th>Due Date</th><th>Status</th></tr>
+              <tr><th>#</th><th>Student</th><th>Project</th><th>Status</th></tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Design UI</td><td>12 Jul 2026</td><td><span className="badge completed">Done</span></td></tr>
-              <tr><td>2</td><td>Backend API</td><td>15 Jul 2026</td><td><span className="badge in-progress">In Progress</span></td></tr>
-              <tr><td>3</td><td>Database Schema</td><td>18 Jul 2026</td><td><span className="badge pending">Pending</span></td></tr>
-              <tr><td>4</td><td>Testing & QA</td><td>22 Jul 2026</td><td><span className="badge pending">Pending</span></td></tr>
+              <tr><td>1</td><td>Arjun Sharma</td><td>AI Chatbot</td><td><span className="badge in-progress">In Progress</span></td></tr>
+              <tr><td>2</td><td>Rohan Verma</td><td>Inventory System</td><td><span className="badge pending">Pending</span></td></tr>
+              <tr><td>3</td><td>Vikram Nair</td><td>Chat Application</td><td><span className="badge in-progress">In Progress</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -50,12 +47,12 @@ function DashboardHome() {
         <div className="activity-section">
           <h3>Recent Activity</h3>
           <ul className="activity-list">
-            <li><span className="dot green"></span> Design UI task marked complete</li>
-            <li><span className="dot blue"></span> Submitted progress report</li>
-            <li><span className="dot orange"></span> Backend API deadline updated</li>
-            <li><span className="dot purple"></span> Supervisor Raj Sharma left a comment</li>
+            <li><span className="dot blue"></span> Arjun Sharma submitted progress report</li>
+            <li><span className="dot orange"></span> Rohan Verma missed task deadline</li>
+            <li><span className="dot green"></span> Vikram Nair completed UI design</li>
+            <li><span className="dot purple"></span> Evaluation form due on 15 Jul</li>
           </ul>
-        </div>
+        </div>/
       </div>
     </div>
   );
@@ -65,16 +62,13 @@ function Dashboard() {
   const [page, setPage] = useState('home');
 
   const pageNames = {
-    home: 'Dashboard', myproject: 'My Project', mytasks: 'My Tasks',
-    submissions: 'Submissions', mysupervisor: 'My Supervisor',
-    schedule: 'Schedule', announcements: 'Announcements'
+    home: 'Dashboard', mystudents: 'My Students',
+    evaluate: 'Evaluate', schedule: 'Schedule', announcements: 'Announcements'
   };
 
   function renderPage() {
-    if (page === 'myproject')     return <MyProject />;
-    if (page === 'mytasks')       return <MyTasks />;
-    if (page === 'submissions')   return <Submissions />;
-    if (page === 'mysupervisor')  return <MySupervisor />;
+    if (page === 'mystudents')    return <MyStudents />;
+    if (page === 'evaluate')      return <Evaluate />;
     if (page === 'schedule')      return <Schedule />;
     if (page === 'announcements') return <Announcements />;
     return <DashboardHome />;
@@ -86,14 +80,11 @@ function Dashboard() {
         <div className="sidebar-brand">SPMS</div>
         <nav className="sidebar-nav">
           <button className="nav-item" onClick={() => setPage('home')}>Dashboard</button>
-          <button className="nav-item" onClick={() => setPage('myproject')}>My Project</button>
-          <button className="nav-item" onClick={() => setPage('mytasks')}>My Tasks</button>
-          <button className="nav-item" onClick={() => setPage('submissions')}>Submissions</button>
-          <button className="nav-item" onClick={() => setPage('mysupervisor')}>My Supervisor</button>
+          <button className="nav-item" onClick={() => setPage('mystudents')}>My Students</button>
+          <button className="nav-item" onClick={() => setPage('evaluate')}>Evaluate</button>
           <button className="nav-item" onClick={() => setPage('schedule')}>Schedule</button>
           <button className="nav-item" onClick={() => setPage('announcements')}>Announcements</button>
         </nav>
-     
       </aside>
 
       <div className="dash-main">
@@ -103,8 +94,8 @@ function Dashboard() {
             <input className="search-input" type="text" placeholder="Search..." />
             <div className="profile-hover-wrap">
               <button className="profile-btn">
-                <div className="avatar">A</div>
-                <span className="profile-name">Arjun</span>
+                <div className="avatar">RS</div>
+                <span className="profile-name">Raj Sharma</span>
                 <span className="arrow">▾</span>
               </button>
               <div className="profile-dropdown">

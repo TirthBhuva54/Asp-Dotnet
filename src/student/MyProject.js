@@ -8,7 +8,7 @@ function MyProject() {
 
       <div className="project-card">
         <div className="proj-row"><span className="proj-label">Project Title</span><span>AI Chatbot</span></div>
-        <div className="proj-row"><span className="proj-label">Supervisor</span><span>Dr. Rajesh Kumar</span></div>
+        <div className="proj-row"><span className="proj-label">Supervisor</span><span>Raj Sharma</span></div>
         <div className="proj-row"><span className="proj-label">Department</span><span>Computer Science</span></div>
         <div className="proj-row"><span className="proj-label">Start Date</span><span>1 Jan 2026</span></div>
         <div className="proj-row"><span className="proj-label">Deadline</span><span>31 Jul 2026</span></div>

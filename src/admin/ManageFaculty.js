@@ -25,7 +25,7 @@ function ManageFaculty() {
         </thead>
         <tbody>
           <tr>
-            <td>1</td><td>Dr. Rajesh Kumar</td><td>rajesh@spms.com</td><td>Computer Science</td><td>5</td>
+            <td>1</td><td>Raj Sharma</td><td>raj@spms.com</td><td>Computer Science</td><td>5</td>
             <td><span className="badge active">Active</span></td>
             <td><button className="act-btn view">Edit</button><button className="act-btn delete">Remove</button></td>
           </tr>
