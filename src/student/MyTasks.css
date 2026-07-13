@@ -1,0 +1,13 @@
+.page-wrap { padding: 8px 0; }
+.page-wrap h2 { font-size: 20px; color: #1a1a1a; margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: #888; margin-bottom: 20px; }
+
+.page-table { width: 100%; border-collapse: collapse; font-size: 14px; background: white; border-radius: 7px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+.page-table th { text-align: left; padding: 10px 14px; background: #f9fafb; color: #555; font-weight: 600; border-bottom: 1px solid #eee; }
+.page-table td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; color: #333; }
+.page-table tr:last-child td { border-bottom: none; }
+
+.badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.badge.in-progress { background: #e8f0fe; color: #4f5fc4; }
+.badge.completed   { background: #e6f9f0; color: #27ae60; }
+.badge.pending     { background: #fff4e5; color: #e67e22; }

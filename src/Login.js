@@ -6,15 +6,17 @@ import users from './users';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   function handleLogin() {
     const user = users.find(u => u.email === email && u.password === password);
+    if (!user) { setError('Invalid email or password.'); return; }
     navigate('/' + user.role + '/dashboard');
   }
 
   return (
-    <div className="login-page">
+    <div className="login-page" >
       <div className="login-box">
         <div className="login-header">
           <h1>SPMS</h1>
@@ -35,6 +37,8 @@ function Login() {
             <input id="password" type="password" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
           </div>
 
+
+          {error && <p className="login-error">{error}</p>}
 
           <div className="form-row">
             <label className="check-label"><input type="checkbox" /> Remember me</label>

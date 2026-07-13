@@ -1,0 +1,15 @@
+.page-wrap { padding: 8px 0; }
+.page-wrap h2 { font-size: 20px; color: #1a1a1a; margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: #888; margin-bottom: 20px; }
+
+.project-card { background: white; border-radius: 7px; padding: 22px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); margin-bottom: 16px; max-width: 560px; }
+.proj-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #333; }
+.proj-row:last-child { border-bottom: none; }
+.proj-label { font-weight: 600; color: #555; }
+
+.desc-card { background: white; border-radius: 7px; padding: 22px 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); max-width: 560px; }
+.desc-card h3 { font-size: 15px; font-weight: 600; color: #222; margin-bottom: 10px; }
+.desc-card p { font-size: 14px; color: #555; line-height: 1.6; }
+
+.badge { padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.badge.in-progress { background: #e8f0fe; color: #4f5fc4; }

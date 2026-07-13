@@ -12,7 +12,7 @@ import ManageFaculty from './ManageFaculty';
 function DashboardHome() {
   return (
     <div>
-      <p className="welcome-text">Good morning, Admin 👋</p>
+      <p className="welcome-text">Good morning, Admin </p>
       <div className="stats-grid">
         <div className="stat-card" style={{ borderTop: '4px solid #4f5fc4' }}>
           <p className="stat-value" style={{ color: '#4f5fc4' }}>24</p>
@@ -69,17 +69,22 @@ function DashboardHome() {
 
 function Dashboard() {
   const [page, setPage] = useState('home');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const pageNames = {
+    home: 'Dashboard', projects: 'Projects', students: 'Students',
+    managestudents: 'Manage Students', managefaculty: 'Manage Faculty',
+    tasks: 'Tasks', reports: 'Reports', announcements: 'Announcements', settings: 'Settings'
+  };
 
   function renderPage() {
-    if (page === 'projects')        return <Projects />;
-    if (page === 'students')        return <Students />;
-    if (page === 'tasks')           return <Tasks />;
-    if (page === 'reports')         return <Reports />;
-    if (page === 'settings')        return <Settings />;
-    if (page === 'announcements')   return <Announcements />;
-    if (page === 'managestudents')  return <ManageStudents />;
-    if (page === 'managefaculty')   return <ManageFaculty />;
+    if (page === 'projects')      return <Projects />;
+    if (page === 'students')      return <Students />;
+    if (page === 'tasks')         return <Tasks />;
+    if (page === 'reports')       return <Reports />;
+    if (page === 'settings')      return <Settings />;
+    if (page === 'announcements') return <Announcements />;
+    if (page === 'managestudents')return <ManageStudents />;
+    if (page === 'managefaculty') return <ManageFaculty />;
     return <DashboardHome />;
   }
 
@@ -98,30 +103,27 @@ function Dashboard() {
           <button className="nav-item" onClick={() => setPage('announcements')}>Announcements</button>
           <button className="nav-item" onClick={() => setPage('settings')}>Settings</button>
         </nav>
-        <div className="sidebar-footer">
-          <p className="last-login">Last login: Today 9:42 AM</p>
-        </div>
       </aside>
 
       <div className="dash-main">
         <header className="navbar">
-          <span className="page-title">Admin Dashboard</span>
+          <span className="page-title">{pageNames[page]}</span>
           <div className="navbar-right">
             <input className="search-input" type="text" placeholder="Search..." />
-            <div className="profile-wrap">
-              <button className="profile-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
+            <div className="profile-hover-wrap">
+              <button className="profile-btn">
                 <div className="avatar">A</div>
                 <span className="profile-name">Admin</span>
                 <span className="arrow">▾</span>
               </button>
-              {dropdownOpen && (
-                <div className="profile-dropdown">
+              <div className="profile-dropdown">
+                <div className="profile-dropdown-inner">
                   <a href="#">My Profile</a>
                   <a href="#">Change Password</a>
                   <hr />
                   <a href="/" className="logout-link">Logout</a>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </header>
