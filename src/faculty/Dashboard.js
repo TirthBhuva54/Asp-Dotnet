@@ -1,75 +1,160 @@
 import './Dashboard.css';
 import { useState } from 'react';
 import MyStudents from './MyStudents';
-import Evaluate from './Evaluate';
+import ManageTasks from './ManageTasks';
 import Announcements from './Announcements';
 import Schedule from './Schedule';
+
+// Faculty sees: their students (SPM_ProjectAllocation), tasks they assigned (SPM_Task)
+// Faculty CANNOT: manage users, manage roles, manage all projects, view reports of all users
+
+const myStats = {
+  students: 5,
+  activeProjects: 3,
+  pendingTasks: 7,
+  completedProjects: 2,
+};
 
 function DashboardHome() {
   return (
     <div>
-      <p className="welcome-text">Welcome, Raj Sharma </p>
+      <div className="content-header">
+        <h2>Dashboard</h2>
+        <p>Welcome back, Dr. Rajesh Kumar. Here's your supervision overview.</p>
+      </div>
 
       <div className="stats-grid">
-        <div className="stat-card" style={{ borderTop: '4px solid #4f5fc4' }}>
-          <p className="stat-value" style={{ color: '#4f5fc4' }}>5</p>
-          <p className="stat-label">Assigned Students</p>
+        <div className="stat-card">
+          <div className="stat-top">
+            <span className="stat-label">My Students</span>
+            <div className="stat-icon-box" style={{ background: '#dbeafe' }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+          </div>
+          <div className="stat-value">{myStats.students}</div>
+          <div className="stat-sub">assigned students</div>
         </div>
-        <div className="stat-card" style={{ borderTop: '4px solid #27ae60' }}>
-          <p className="stat-value" style={{ color: '#27ae60' }}>3</p>
-          <p className="stat-label">Projects Active</p>
+        <div className="stat-card">
+          <div className="stat-top">
+            <span className="stat-label">Active Projects</span>
+            <div className="stat-icon-box" style={{ background: '#dcfce7' }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            </div>
+          </div>
+          <div className="stat-value">{myStats.activeProjects}</div>
+          <div className="stat-sub">projects active</div>
         </div>
-        <div className="stat-card" style={{ borderTop: '4px solid #e67e22' }}>
-          <p className="stat-value" style={{ color: '#e67e22' }}>4</p>
-          <p className="stat-label">Pending Reviews</p>
+        <div className="stat-card">
+          <div className="stat-top">
+            <span className="stat-label">Pending Tasks</span>
+            <div className="stat-icon-box" style={{ background: '#fef9c3' }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#a16207" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+          </div>
+          <div className="stat-value">{myStats.pendingTasks}</div>
+          <div className="stat-sub">tasks pending review</div>
         </div>
-        <div className="stat-card" style={{ borderTop: '4px solid #8e44ad' }}>
-          <p className="stat-value" style={{ color: '#8e44ad' }}>2</p>
-          <p className="stat-label">Completed</p>
+        <div className="stat-card">
+          <div className="stat-top">
+            <span className="stat-label">Completed</span>
+            <div className="stat-icon-box" style={{ background: '#f3e8ff' }}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <div className="stat-value">{myStats.completedProjects}</div>
+          <div className="stat-sub">projects completed</div>
         </div>
       </div>
 
       <div className="dash-row">
         <div className="table-section">
-          <h3>My Students</h3>
+          <div className="section-header"><h3>My Students</h3></div>
           <table className="proj-table">
             <thead>
-              <tr><th>#</th><th>Student</th><th>Project</th><th>Status</th></tr>
+              <tr><th>#</th><th>Student</th><th>Enrollment No</th><th>Project</th><th>Progress</th><th>Status</th></tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Arjun Sharma</td><td>AI Chatbot</td><td><span className="badge in-progress">In Progress</span></td></tr>
-              <tr><td>2</td><td>Rohan Verma</td><td>Inventory System</td><td><span className="badge pending">Pending</span></td></tr>
-              <tr><td>3</td><td>Vikram Nair</td><td>Chat Application</td><td><span className="badge in-progress">In Progress</span></td></tr>
+              <tr>
+                <td>1</td><td>Arjun Sharma</td><td>CS-2201</td><td>AI Chatbot</td>
+                <td>
+                  <div style={{ display:'flex', alignItems:'center', gap:6 }}>
+                    <div style={{ width:80, height:5, background:'#e2e8f0', borderRadius:4, overflow:'hidden' }}>
+                      <div style={{ width:'62%', height:'100%', background:'#3b82f6', borderRadius:4 }} />
+                    </div>
+                    <span style={{ fontSize:11, color:'#64748b' }}>62%</span>
+                  </div>
+                </td>
+                <td><span className="badge ongoing">Ongoing</span></td>
+              </tr>
+              <tr>
+                <td>2</td><td>Rohan Verma</td><td>IT-2203</td><td>Inventory System</td>
+                <td>
+                  <div style={{ display:'flex', alignItems:'center', gap:6 }}>
+                    <div style={{ width:80, height:5, background:'#e2e8f0', borderRadius:4, overflow:'hidden' }}>
+                      <div style={{ width:'33%', height:'100%', background:'#3b82f6', borderRadius:4 }} />
+                    </div>
+                    <span style={{ fontSize:11, color:'#64748b' }}>33%</span>
+                  </div>
+                </td>
+                <td><span className="badge pending">Pending</span></td>
+              </tr>
+              <tr>
+                <td>3</td><td>Priya Patel</td><td>CS-2202</td><td>E-Commerce Platform</td>
+                <td>
+                  <div style={{ display:'flex', alignItems:'center', gap:6 }}>
+                    <div style={{ width:80, height:5, background:'#e2e8f0', borderRadius:4, overflow:'hidden' }}>
+                      <div style={{ width:'100%', height:'100%', background:'#22c55e', borderRadius:4 }} />
+                    </div>
+                    <span style={{ fontSize:11, color:'#64748b' }}>100%</span>
+                  </div>
+                </td>
+                <td><span className="badge completed">Completed</span></td>
+              </tr>
             </tbody>
           </table>
         </div>
-
         <div className="activity-section">
           <h3>Recent Activity</h3>
           <ul className="activity-list">
-            <li><span className="dot blue"></span> Arjun Sharma submitted progress report</li>
-            <li><span className="dot orange"></span> Rohan Verma missed task deadline</li>
-            <li><span className="dot green"></span> Vikram Nair completed UI design</li>
-            <li><span className="dot purple"></span> Evaluation form due on 15 Jul</li>
+            <li><span className="act-dot blue"></span> Arjun Sharma submitted progress report</li>
+            <li><span className="act-dot orange"></span> Rohan Verma missed task deadline</li>
+            <li><span className="act-dot green"></span> Priya Patel project marked completed</li>
+            <li><span className="act-dot red"></span> New task review pending for Arjun</li>
           </ul>
-        </div>/
+        </div>
       </div>
+      <div className="faculty-footer">© 2026 SPMS. All Rights Reserved.</div>
     </div>
   );
 }
 
+const NAV_SECTIONS = [
+  {
+    label: 'My Supervision',
+    items: [
+      { key: 'home',         label: 'Dashboard'     },
+      { key: 'mystudents',   label: 'My Students'   },
+      { key: 'managetasks',  label: 'Manage Tasks'  },
+      { key: 'schedule',     label: 'Schedule'      },
+    ]
+  },
+  {
+    label: 'General',
+    items: [
+      { key: 'announcements', label: 'Announcements' },
+    ]
+  }
+];
+
 function Dashboard() {
   const [page, setPage] = useState('home');
-
-  const pageNames = {
-    home: 'Dashboard', mystudents: 'My Students',
-    evaluate: 'Evaluate', schedule: 'Schedule', announcements: 'Announcements'
-  };
+  const allItems = NAV_SECTIONS.flatMap(s => s.items);
+  const currentItem = allItems.find(i => i.key === page) || allItems[0];
 
   function renderPage() {
-    if (page === 'mystudents')    return <MyStudents />;
-    if (page === 'evaluate')      return <Evaluate />;
-    if (page === 'schedule')      return <Schedule />;
+    if (page === 'mystudents')   return <MyStudents />;
+    if (page === 'managetasks')  return <ManageTasks />;
+    if (page === 'schedule')     return <Schedule />;
     if (page === 'announcements') return <Announcements />;
     return <DashboardHome />;
   }
@@ -77,26 +162,44 @@ function Dashboard() {
   return (
     <div className="dash-layout">
       <aside className="sidebar">
-        <div className="sidebar-brand">SPMS</div>
+        <div className="sidebar-brand">
+          <div className="sidebar-brand-icon">S</div>
+          SPMS
+        </div>
         <nav className="sidebar-nav">
-          <button className="nav-item" onClick={() => setPage('home')}>Dashboard</button>
-          <button className="nav-item" onClick={() => setPage('mystudents')}>My Students</button>
-          <button className="nav-item" onClick={() => setPage('evaluate')}>Evaluate</button>
-          <button className="nav-item" onClick={() => setPage('schedule')}>Schedule</button>
-          <button className="nav-item" onClick={() => setPage('announcements')}>Announcements</button>
+          {NAV_SECTIONS.map(section => (
+            <div key={section.label}>
+              <div className="sidebar-section-label">{section.label}</div>
+              {section.items.map(item => (
+                <button
+                  key={item.key}
+                  className={`nav-item${page === item.key ? ' active' : ''}`}
+                  onClick={() => setPage(item.key)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          ))}
         </nav>
       </aside>
 
       <div className="dash-main">
         <header className="navbar">
-          <span className="page-title">{pageNames[page]}</span>
+          <div className="navbar-left">
+            <div className="breadcrumb">Home / <span>{currentItem.label}</span></div>
+          </div>
           <div className="navbar-right">
             <input className="search-input" type="text" placeholder="Search..." />
+            <button className="notif-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span className="notif-dot"></span>
+            </button>
             <div className="profile-hover-wrap">
               <button className="profile-btn">
-                <div className="avatar">RS</div>
-                <span className="profile-name">Raj Sharma</span>
-                <span className="arrow">▾</span>
+                <div className="avatar">RK</div>
+                <span className="profile-name">Dr. Rajesh</span>
+                <span className="arrow">&#9662;</span>
               </button>
               <div className="profile-dropdown">
                 <div className="profile-dropdown-inner">
@@ -109,9 +212,7 @@ function Dashboard() {
             </div>
           </div>
         </header>
-        <main className="dash-content">
-          {renderPage()}
-        </main>
+        <main className="dash-content">{renderPage()}</main>
       </div>
     </div>
   );

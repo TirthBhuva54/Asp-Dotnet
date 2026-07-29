@@ -1,14 +1,19 @@
-import './Schedule.css';
+// Faculty schedule — based on SPM_Task.NextFollowUpDate
+
+const scheduleItems = [
+  { id: 1, student: 'Arjun Sharma',  purpose: 'NLP Model Review',       date: '2026-08-01', time: '11:00 AM', status: 'Upcoming' },
+  { id: 2, student: 'Rohan Verma',   purpose: 'Inventory Module Review', date: '2026-07-25', time: '10:00 AM', status: 'Upcoming' },
+  { id: 3, student: 'Priya Patel',   purpose: 'Final Evaluation',        date: '2026-07-10', time: '02:00 PM', status: 'Done'     },
+  { id: 4, student: 'Sneha Iyer',    purpose: 'Progress Review',         date: '2026-07-14', time: '09:00 AM', status: 'Upcoming' },
+  { id: 5, student: 'Vikram Nair',   purpose: 'Project Kickoff',         date: '2026-07-20', time: '03:00 PM', status: 'Upcoming' },
+];
 
 function Schedule() {
   return (
     <div className="page-wrap">
-      <div className="page-header">
-        <div>
-          <h2>Schedule</h2>
-          <p className="page-sub">Manage meeting and review slots with your students.</p>
-        </div>
-        <button className="add-btn">+ Add Slot</button>
+      <div className="content-header">
+        <h2>Schedule</h2>
+        <p>Upcoming follow-up sessions with your students, based on task NextFollowUpDate.</p>
       </div>
 
       <table className="page-table">
@@ -16,28 +21,19 @@ function Schedule() {
           <tr><th>#</th><th>Student</th><th>Purpose</th><th>Date</th><th>Time</th><th>Status</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td><td>Arjun Sharma</td><td>Progress Review</td><td>14 Jul 2026</td><td>10:00 AM</td>
-            <td><span className="badge upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>2</td><td>Rohan Verma</td><td>Proposal Discussion</td><td>15 Jul 2026</td><td>11:30 AM</td>
-            <td><span className="badge upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>3</td><td>Vikram Nair</td><td>Mid-Term Evaluation</td><td>10 Jul 2026</td><td>2:00 PM</td>
-            <td><span className="badge done">Done</span></td>
-          </tr>
-          <tr>
-            <td>4</td><td>Kavya Reddy</td><td>Task Review</td><td>16 Jul 2026</td><td>9:00 AM</td>
-            <td><span className="badge upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>5</td><td>Amit Joshi</td><td>Final Presentation</td><td>8 Jul 2026</td><td>3:00 PM</td>
-            <td><span className="badge done">Done</span></td>
-          </tr>
+          {scheduleItems.map((s, i) => (
+            <tr key={s.id}>
+              <td>{i + 1}</td>
+              <td style={{ fontWeight: 600 }}>{s.student}</td>
+              <td>{s.purpose}</td>
+              <td style={{ fontSize: '13px', color: '#64748b' }}>{s.date}</td>
+              <td style={{ fontSize: '13px', color: '#64748b' }}>{s.time}</td>
+              <td><span className={`badge ${s.status === 'Upcoming' ? 'upcoming' : 'done'}`}>{s.status}</span></td>
+            </tr>
+          ))}
         </tbody>
       </table>
+      <div className="faculty-footer">© 2026 SPMS. All Rights Reserved.</div>
     </div>
   );
 }

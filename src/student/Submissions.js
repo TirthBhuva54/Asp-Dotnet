@@ -1,6 +1,20 @@
-import './Submissions.css';
+import { useState } from 'react';
+
+const initialSubs = [
+  { id: 1, title: 'Initial Project Proposal',  type: 'PDF',  submittedOn: '2026-02-05', status: 'Approved'      },
+  { id: 2, title: 'Mid-Term Progress Report',  type: 'PDF',  submittedOn: '2026-05-10', status: 'Approved'      },
+  { id: 3, title: 'Final Report Draft',        type: 'DOCX', submittedOn: '2026-07-08', status: 'Under Review'  },
+];
+
+function statusClass(s) {
+  if (s === 'Approved')     return 'approved';
+  if (s === 'Under Review') return 'review';
+  return 'rejected';
+}
 
 function Submissions() {
+  const [subs] = useState(initialSubs);
+
   return (
     <div className="page-wrap">
       <div className="page-header">
@@ -8,28 +22,35 @@ function Submissions() {
           <h2>Submissions</h2>
           <p className="page-sub">Your project report and file submissions.</p>
         </div>
-        <button className="add-btn">+ Upload Submission</button>
       </div>
 
       <table className="page-table">
         <thead>
-          <tr><th>#</th><th>Title</th><th>Type</th><th>Submitted On</th><th>Status</th></tr>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>File Type</th>
+            <th>Submitted On</th>
+            <th>Status</th>
+          </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td><td>Initial Project Proposal</td><td>PDF</td><td>5 Feb 2026</td>
-            <td><span className="badge approved">Approved</span></td>
-          </tr>
-          <tr>
-            <td>2</td><td>Mid-Term Progress Report</td><td>PDF</td><td>10 May 2026</td>
-            <td><span className="badge approved">Approved</span></td>
-          </tr>
-          <tr>
-            <td>3</td><td>Final Report Draft</td><td>DOCX</td><td>8 Jul 2026</td>
-            <td><span className="badge review">Under Review</span></td>
-          </tr>
+          {subs.map((s, i) => (
+            <tr key={s.id}>
+              <td>{i + 1}</td>
+              <td style={{ fontWeight: 600 }}>{s.title}</td>
+              <td>
+                <span style={{ padding: '2px 8px', background: '#f1f5f9', color: '#475569', borderRadius: 5, fontSize: 12, fontWeight: 600 }}>
+                  {s.type}
+                </span>
+              </td>
+              <td style={{ fontSize: 13, color: '#64748b' }}>{s.submittedOn}</td>
+              <td><span className={`badge ${statusClass(s.status)}`}>{s.status}</span></td>
+            </tr>
+          ))}
         </tbody>
       </table>
+      <div className="student-footer">© 2026 SPMS. All Rights Reserved.</div>
     </div>
   );
 }
