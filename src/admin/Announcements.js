@@ -1,16 +1,9 @@
 import { useState } from 'react';
 
-const initialAnn = [
-  { id: 1, badge: 'all',         title: 'Final Project Submission Deadline',  date: '10 Jul 2026', body: 'All students must submit their final project report by 31st July 2026. Late submissions will not be accepted.' },
-  { id: 2, badge: 'students',    title: 'Project Presentation Schedule',       date: '7 Jul 2026',  body: 'Presentations will be held from 1st August to 5th August. Check the notice board for your assigned slot.' },
-  { id: 3, badge: 'supervisors', title: 'Faculty Evaluation Form',             date: '3 Jul 2026',  body: 'Please complete the mid-term evaluation forms for your assigned students before 15th July 2026.' },
-  { id: 4, badge: 'all',         title: 'System Maintenance Notice',           date: '1 Jul 2026',  body: 'SPMS will be under scheduled maintenance on 12th July from 12 AM to 4 AM. Please save your work beforehand.' },
-];
-
 const badgeLabel = { all: 'All', students: 'Students', supervisors: 'Faculty' };
 
 function AnnForm({ ann, onSave, onBack }) {
-  const [form, setForm] = useState(ann || { title: '', badge: 'all', body: '', date: '' });
+  const [form, setForm] = useState(ann || { title: '', target: 'all', body: '' });
   const ch = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
   return (
@@ -27,7 +20,7 @@ function AnnForm({ ann, onSave, onBack }) {
         </div>
         <div className="form-row">
           <label>Audience</label>
-          <select className="form-select" value={form.badge} onChange={e => ch('badge', e.target.value)}>
+          <select className="form-select" value={form.target} onChange={e => ch('target', e.target.value)}>
             <option value="all">All</option>
             <option value="students">Students</option>
             <option value="supervisors">Faculty</option>
@@ -47,18 +40,19 @@ function AnnForm({ ann, onSave, onBack }) {
 }
 
 function Announcements() {
-  const [anns, setAnns] = useState(initialAnn);
+  const [anns, setAnns] = useState([]);
   const [view, setView] = useState('list');
   const [editing, setEditing] = useState(null);
 
+  // TODO: fetch from GET /api/announcements
+
   const handleSave = (form) => {
-    const now = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-    if (editing) {
-      setAnns(anns.map(a => a.id === editing.id ? { ...form, id: a.id, date: a.date } : a));
-    } else {
-      setAnns([{ ...form, id: Date.now(), date: now }, ...anns]);
-    }
+    // TODO: POST /api/announcements or PUT /api/announcements/{id}
     setView('list'); setEditing(null);
+  };
+
+  const handleDelete = (id) => {
+    // TODO: DELETE /api/announcements/{id}
   };
 
   if (view === 'form') {
@@ -74,16 +68,15 @@ function Announcements() {
         </div>
         <button className="add-btn" onClick={() => { setEditing(null); setView('form'); }}>+ New Announcement</button>
       </div>
-
       <div className="ann-list">
         {anns.map(a => (
           <div className="ann-card" key={a.id}>
             <div className="ann-top">
-              <span className={`ann-badge ${a.badge}`}>{badgeLabel[a.badge]}</span>
+              <span className={`ann-badge ${a.target}`}>{badgeLabel[a.target] || a.target}</span>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                <span className="ann-date">{a.date}</span>
+                <span className="ann-date">{a.postedOn?.slice(0, 10)}</span>
                 <button className="act-btn view" style={{ margin: 0 }} onClick={() => { setEditing(a); setView('form'); }}>Edit</button>
-                <button className="act-btn delete" style={{ margin: 0 }} onClick={() => setAnns(anns.filter(x => x.id !== a.id))}>Delete</button>
+                <button className="act-btn delete" style={{ margin: 0 }} onClick={() => handleDelete(a.id)}>Delete</button>
               </div>
             </div>
             <h4>{a.title}</h4>

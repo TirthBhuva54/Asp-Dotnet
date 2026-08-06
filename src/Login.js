@@ -1,7 +1,7 @@
 import './Login.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import users from './users';
+import api from './api/axios';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -9,14 +9,25 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  function handleLogin() {
-    const user = users.find(u => u.email === email && u.password === password);
-    if (!user) { setError('Invalid email or password.'); return; }
-    navigate('/' + user.role + '/dashboard');
+  async function handleLogin() {
+    try {
+      const res = await api.post('/auth/login', { email, password });
+      const user = res.data;
+
+     
+
+      const role = user.userTypeName?.toLowerCase();
+      if (role === 'admin')        navigate('/admin/dashboard');
+      else if (role === 'faculty') navigate('/faculty/dashboard');
+      else if (role === 'student') navigate('/student/dashboard');
+      else setError('Unknown role.');
+    } catch (err) {
+      setError('Invalid email or password.');
+    }
   }
 
   return (
-    <div className="login-page" >
+    <div className="login-page">
       <div className="login-box">
         <div className="login-header">
           <h1>SPMS</h1>
@@ -36,7 +47,6 @@ function Login() {
             <label htmlFor="password">Password</label>
             <input id="password" type="password" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
           </div>
-
 
           {error && <p className="login-error">{error}</p>}
 

@@ -1,5 +1,4 @@
-// Faculty view of SPM_ProjectAllocation — only their own students
-// READ ONLY: faculty cannot add/remove students (admin does that)
+import { useState } from 'react';
 
 const myStudents = [
   { id: 1, fullName: 'Arjun Sharma',  userCode: 'CS-2201', projectTitle: 'AI Chatbot',          assignedDate: '2024-09-01', startDate: '2024-09-01', endDate: '2025-03-01', totalTasks: 8,  completedTasks: 5,  progress: 62.50, grade: ''  },
@@ -9,7 +8,6 @@ const myStudents = [
   { id: 5, fullName: 'Vikram Nair',   userCode: 'CS-2205', projectTitle: 'IoT Weather Station',  assignedDate: '2025-03-01', startDate: '2025-03-01', endDate: '2025-09-01', totalTasks: 5,  completedTasks: 0,  progress: 0,     grade: ''  },
 ];
 
-import { useState } from 'react';
 
 function StudentDetail({ s, onBack }) {
   return (

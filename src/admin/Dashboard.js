@@ -9,6 +9,11 @@ import ManageFaculty from './ManageFaculty';
 import ManageUsers from './ManageUsers';
 import ManageRoles from './ManageRoles';
 import UserRoles from './UserRoles';
+import { useEffect } from 'react';
+
+useEffect(() => {
+    api.get('/users/students').then(res => setStudents(res.data));
+  }, []);
 
 function DashboardHome() {
   return (
